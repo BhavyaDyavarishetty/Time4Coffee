@@ -17,5 +17,11 @@ router.post('/register', function(req, res) {
   });
 });
 
+router.post('/update', function(req, res) {
+  persistance.updateDocument(req['body'], function () {
+    res.send('Pot is updated')
+  });
+});
+
 
 module.exports = router;
