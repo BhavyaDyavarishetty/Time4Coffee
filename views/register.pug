@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1= title
+  h1= emptyWeight
   p Welcome to #{title} register
+
+  div.pot-name
+    | Pot Name: 
+    input(type='text', name='title', value=name, onkeydown=inputEnter())
+  div.empty-pot
+    | Place the pot on scale
+    if emptyWeight
+      i(class='green-check fas fa-check-square')
+  div.full-pot
+    | Fill the pot
+    if capacityWeight
+      i(class='green-check fas fa-check-square')
+
+  a(href="/register")
+   button(type="button") Done
