@@ -1,6 +1,7 @@
-const express = require('express');
-const router = express.Router();
 
+var express = require('express');
+var router = express.Router();
+var persistance = require('./persistance')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -32,16 +33,17 @@ router.get('/register', function(req, res, next) {
   // res.render('index', { title: 'Time4Coffee' })
 });
 
-router.post('/register', function(req, res, next) {
-  console.log('posted data', req, res, next);
-
-
-  res.render('index', { title: 'Time4Coffee' })
-
+router.post('/register', function(req, res) {
+  persistance.insertDocuments(req['body'], function () {
+    res.send('Pot is registered')
+  });
 });
 
-router.post('/post-weights', function(req, res, next) {
-
+router.post('/update', function(req, res) {
+  persistance.updateDocument(req['body'], function () {
+    res.send('Pot is updated')
+  });
 });
+
 
 module.exports = router;
