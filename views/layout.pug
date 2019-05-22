@@ -26,8 +26,9 @@ html
       if(input) {
         input.addEventListener('keyup', async function(event) {
           if (event.keyCode === 13 || event.keyCode === 9) {
+            console.log('event.keyCode', event.keyCode);
             event.preventDefault();
-            params = { "pot_id": uuidInput.value, "pot_name": document.querySelector('#pot-input-text').value, "empty_pot_weight": 0, "pot_capacity": 0 }
+            params = { "pot_id": uuidInput.value, "pot_name": document.querySelector('#pot-input-text').value, "empty_pot_weight": 0, "pot_capacity": 0, "current_weight": 0 }
             console.log('input', params);
             const response = await request('/register', params, 'POST');
             console.log('response', response);
@@ -37,9 +38,10 @@ html
 
       if(uuidInput) {
         uuidInput.addEventListener('keyup', async function(event) {
+          console.log('event.keyCode', event.keyCode);
           if (event.keyCode === 13 || event.keyCode === 9) {
             event.preventDefault();
-            params = { "pot_id": uuidInput.value, "pot_name": input.value, "empty_pot_weight": 0, "pot_capacity": 0 }
+            params = { "pot_id": uuidInput.value, "pot_name": input.value, "empty_pot_weight": 0, "pot_capacity": 0, "current_weight": 0 }
             console.log('uuidInput', params);
             const response = await request('/register', params, 'POST');
             document.querySelector('#pot-input-text').select();
