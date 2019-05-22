@@ -31,7 +31,7 @@ body {
   justify-content: space-between;
 }
 
-#pot-input-text{
+.input-text{
   padding: 0;
   display: block;
   border: none;

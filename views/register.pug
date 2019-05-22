@@ -3,9 +3,12 @@ extends layout
 block content
 
   div.pot-register
+    div.pot-uuid
+      label(class='name-label') Pot UUID: 
+      input(type='text', class='input-text', id='pot-uuid-text', value=uuid)
     div.pot-name
       label(class='name-label') Pot Name: 
-      input(type='text', id='pot-input-text', value=name)
+      input(type='text', class='input-text', id='pot-input-text', value=name)
     div.label.empty-pot
       label(class='empty-label') Place the pot on scale
       i(class='green-check fas fa-check-square', id='empty-pot-check', style='visibility:hidden')

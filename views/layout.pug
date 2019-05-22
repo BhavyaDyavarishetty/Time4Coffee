@@ -27,6 +27,18 @@ html
         }
       });
 
+      var uuidInput = document.querySelector('#pot-uuid-text');
+
+      uuidInput.addEventListener('keyup', async function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          params = { "pot_id": uuidInput.value, "empty_pot_weight": 0, "pot_capacity": 0 }
+          console.log('uuidInput', params);
+          const response = await request('/register', params, 'POST');
+          console.log('response', response);
+        }
+      });
+
       function request(url, params, type) {
         return new Promise((resolve, reject) => {
           var xmlhttp = new XMLHttpRequest();
@@ -56,6 +68,9 @@ html
       socket.on('data', function(data) {
         console.log("client data", data);
         if (data === null) return;
+        if (data.pot_id) {
+          document.querySelector('#pot-uuid-text').value = data.pot_id;
+        }
         if (data.pot_name) {
           document.querySelector('#pot-input-text').value = data.pot_name;
         }
