@@ -62,7 +62,8 @@ router.post('/update', async function(req, res) {
       res.send('Pot not found');
     }
   } catch(e) {
-    res.send('Pot not updated', e);
+    console.log('Pot not updated', e);
+    res.send('Pot not updated');
   }
   
 });
