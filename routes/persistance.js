@@ -3,14 +3,14 @@ const assert = require('assert');
 let db;
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 // Database Name
 const dbName = 'time4coffee';
 const collectionName = 'coffeepots';
 
 // Use connect method to connect to the server
-MongoClient.connect(url, function(err, client) {
+MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
     db = client.db(dbName);
