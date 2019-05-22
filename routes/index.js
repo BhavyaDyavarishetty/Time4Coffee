@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var persistance = require('./persistance')
 global.handle = () => {};
+let pot_id;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,8 +11,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/register', async function(req, res, next) {
   clearInterval(handle);
+  pot_id = 0;
+  
   handle = setInterval(async function() {
-    const record = await persistance.find({});
+    const record = await persistance.find({ "pot_id": pot_id });
     console.log('posted data', record);
     io.emit('data', record);
   }, 3000);
@@ -23,7 +26,14 @@ router.get('/register', async function(req, res, next) {
 
 router.post('/register', async function(req, res) {
   console.log("post register", req['body']);
-  const record = await persistance.insert(req['body']);
+  pot_id = req['body'].pot_id;
+  const record = await persistance.find({ "pot_id": pot_id });
+  if(record) {
+    await persistance.update(pot_id, req['body']);
+  } else {
+    await persistance.insert(req['body']);
+  }
+  
   res.send('Pot is registered');
 });
 
