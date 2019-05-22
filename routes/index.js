@@ -38,27 +38,31 @@ router.post('/register', async function(req, res) {
 });
 
 router.post('/update', async function(req, res) {
-  const data = req['body'];
-  const { id, weight } = data;
-  console.log('data***********', data, id, weight);
-  const record = await persistance.find({ pot_id: id });
-  console.log('record***********', record);
-  if(record) {
-    const { empty_pot_weight, pot_capacity } = record;
+  try {
+    const data = req['body'];
+    const { id, weight } = data;
+    console.log('data***********', data, id, weight);
+    const record = await persistance.find({ pot_id: id });
+    console.log('record***********', record);
+    if(record) {
+      const { empty_pot_weight, pot_capacity } = record;
 
-    let params;
-    if (empty_pot_weight === 0 && weight >= 100 ) {
-      params = { empty_pot_weight: weight }
-    } else if (pot_capacity === 0) {
-      params = { pot_capacity: weight }
-    } else if (weight < pot_capacity) {
-      params = { current_weight: weight }
+      let params;
+      if (empty_pot_weight === 0 && weight >= 100 ) {
+        params = { empty_pot_weight: weight }
+      } else if (pot_capacity === 0) {
+        params = { pot_capacity: weight }
+      } else if (weight < pot_capacity) {
+        params = { current_weight: weight }
+      }
+
+      await persistance.update(id, params);
+      res.send('Pot is updated');
+    } else {
+      res.send('Pot not found');
     }
-
-    await persistance.update(id, params);
-    res.send('Pot is updated');
-  } else {
-    res.send('Pot not found');
+  } catch(e) {
+    res.send('Pot not updated', e);
   }
   
 });
