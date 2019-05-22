@@ -15,7 +15,7 @@ router.get('/register', async function(req, res, next) {
   
   handle = setInterval(async function() {
     const record = await persistance.find({ "pot_id": pot_id });
-    console.log('posted data', record);
+    // console.log('posted data', record);
     io.emit('data', record);
   }, 3000);
 
@@ -40,7 +40,9 @@ router.post('/register', async function(req, res) {
 router.post('/update', async function(req, res) {
   const data = req['body'];
   const { id, weight } = data;
+  console.log('data***********', data);
   const record = await persistance.find({ pot_id: id });
+  console.log('record***********', record);
   const { empty_pot_weight, pot_capacity } = record;
 
   let params;
