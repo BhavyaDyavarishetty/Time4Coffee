@@ -38,6 +38,7 @@ router.post('/register', async function(req, res) {
 });
 
 router.post('/update', async function(req, res) {
+  console.log('req***********', req);
   const data = req['body'];
   const { id, weight } = data;
   console.log('data***********', data);
