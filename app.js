@@ -40,9 +40,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
 io.on('connect', (client) => {
-  console.log('client connected******');         
+  console.log('client connected******');
 });
 
 http.listen(3001, function(){
