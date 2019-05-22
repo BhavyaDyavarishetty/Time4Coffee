@@ -14,6 +14,11 @@ html
       block content
     script(src="/socket.io/socket.io.js")
     script.
+      var coffeeName = document.querySelector('#coffee-name');
+      var coffeeLeft = document.querySelector('#coffee-left');
+      var rules = document.styleSheets[1].cssRules;
+      var coffeLevelRule = [].filter.call(rules, (rule) => (rule.name == "coffee" && rule.type == CSSRule.KEYFRAMES_RULE))[0];
+
       const socket = io('/');
       var input = document.querySelector('#pot-input-text');
       var uuidInput = document.querySelector('#pot-uuid-text');
@@ -62,15 +67,49 @@ html
                      reject();
                  }
               }
-          };      
+          };
         });
       }
 
       socket.on('connect', function() {
-        console.log('connect ******');
+        console.log('connection established');
       });
       socket.on('coffee-data', function(data) {
+        var pot = {
+          name: data.pot_name,
+          cupSize: 30,
+          min: Math.max(data.empty_pot_weight, 0),
+          max: data.pot_capacity,
+          current: data.current_weight,
+          updateCurrentLevel: () => {
+            var potMaxHeight = 68;
+            var potMinHeight = 0;
+            var potMaxCoffee = pot.max;
+            var potMinCoffee = pot.min;
+            var potVarianceFactor = Math.abs(potMaxHeight / potMaxCoffee);
+            var currPotLevel = Math.abs(pot.current * potVarianceFactor);
+
+            coffeLevelRule.appendRule(`100% { height: ${currPotLevel}px; }`);
+          },
+          remainingCups: () => {
+            return pot.current / pot.cupSize;
+          },
+          displayRemainingCups: () => {
+            var curr = pot.remainingCups();
+            var coffeeString = "";
+            for (var i = 0; i < curr; i++) coffeeString += "☕"
+
+            return coffeeString;
+          }
+        };
+
         console.log('coffee-data ******', data);
+        console.log('calculated-pot-data ******', pot);
+
+        coffeeName.innerHTML = pot.name;
+        coffeeLeft.innerHTML = pot.displayRemainingCups();
+
+        pot.updateCurrentLevel();
       });
       socket.on('data', function(data) {
         console.log("client data", data);

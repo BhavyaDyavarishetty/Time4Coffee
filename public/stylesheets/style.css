@@ -11,6 +11,14 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+#coffee-left {
+  font-size: 60px;
+}
+
+#coffee-name {
+  font-size: 24px;
+}
+
 .name-label {
   font-size: 18px;
   color: #349cee;
