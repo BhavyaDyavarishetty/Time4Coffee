@@ -79,7 +79,7 @@ html
       socket.on('coffee-data', function(data) {
         var pot = {
           name: data.pot_name,
-          cupSize: 30,
+          cupSize: 200,
           min: Math.max(data.empty_pot_weight, 0),
           max: data.pot_capacity,
           current: data.current_weight,
