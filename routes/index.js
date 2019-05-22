@@ -56,7 +56,8 @@ router.post('/update', async function(req, res) {
         params = { current_weight: weight }
       }
 
-      await persistance.update(id, params);
+      console.log('params***********', params);
+      await persistance.update(data.id, params);
       res.send('Pot is updated');
     } else {
       res.send('Pot not found');
