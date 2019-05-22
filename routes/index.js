@@ -56,11 +56,12 @@ router.post('/update', async function(req, res) {
     console.log('record***********', record);
     if(record) {
       const { empty_pot_weight, pot_capacity } = record;
+      const diff = Number(weight) - Number(empty_pot_weight);
 
       let params;
       if (Number(empty_pot_weight) === 0 && Number(weight) >= 100 ) {
         params = { empty_pot_weight: weight }
-      } else if (Number(pot_capacity) <= 0 && Number(empty_pot_weight) > 0 && Number(weight) > Number(empty_pot_weight)) {
+      } else if (Number(pot_capacity) <= 0 && Number(empty_pot_weight) > 0 && Number(weight) > Number(empty_pot_weight) && diff > 100) {
         params = { pot_capacity: weight }
       } else if (Number(weight) <= Number(pot_capacity)) {
         params = { current_weight: weight }
