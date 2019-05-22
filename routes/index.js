@@ -50,7 +50,7 @@ router.post('/update', async function(req, res) {
       let params;
       if (empty_pot_weight === 0 && weight >= 100 ) {
         params = { empty_pot_weight: weight }
-      } else if (pot_capacity === 0) {
+      } else if (pot_capacity <= 0 && empty_pot_weight > 0) {
         params = { pot_capacity: weight }
       } else if (weight < pot_capacity) {
         params = { current_weight: weight }
