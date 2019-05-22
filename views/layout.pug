@@ -18,26 +18,30 @@ html
       var input = document.querySelector('#pot-input-text');
       var uuidInput = document.querySelector('#pot-uuid-text');
 
-      input.addEventListener('keyup', async function(event) {
-        if (event.keyCode === 13 || event.keyCode === 9) {
-          event.preventDefault();
-          params = { "pot_id": uuidInput.value, "pot_name": document.querySelector('#pot-input-text').value, "empty_pot_weight": 0, "pot_capacity": 0 }
-          console.log('input', params);
-          const response = await request('/register', params, 'POST');
-          console.log('response', response);
-        }
-      });
+      if(input) {
+        input.addEventListener('keyup', async function(event) {
+          if (event.keyCode === 13 || event.keyCode === 9) {
+            event.preventDefault();
+            params = { "pot_id": uuidInput.value, "pot_name": document.querySelector('#pot-input-text').value, "empty_pot_weight": 0, "pot_capacity": 0 }
+            console.log('input', params);
+            const response = await request('/register', params, 'POST');
+            console.log('response', response);
+          }
+        });
+      }
 
-      uuidInput.addEventListener('keyup', async function(event) {
-        if (event.keyCode === 13 || event.keyCode === 9) {
-          event.preventDefault();
-          params = { "pot_id": uuidInput.value, "pot_name": input.value, "empty_pot_weight": 0, "pot_capacity": 0 }
-          console.log('uuidInput', params);
-          const response = await request('/register', params, 'POST');
-          document.querySelector('#pot-input-text').select();
-          console.log('response', response);
-        }
-      });
+      if(uuidInput) {
+        uuidInput.addEventListener('keyup', async function(event) {
+          if (event.keyCode === 13 || event.keyCode === 9) {
+            event.preventDefault();
+            params = { "pot_id": uuidInput.value, "pot_name": input.value, "empty_pot_weight": 0, "pot_capacity": 0 }
+            console.log('uuidInput', params);
+            const response = await request('/register', params, 'POST');
+            document.querySelector('#pot-input-text').select();
+            console.log('response', response);
+          }
+        });
+      }
 
       function request(url, params, type) {
         return new Promise((resolve, reject) => {
@@ -64,6 +68,9 @@ html
 
       socket.on('connect', function() {
         console.log('connect ******');
+      });
+      socket.on('coffee-data', function(data) {
+        console.log('coffee-data ******', data);
       });
       socket.on('data', function(data) {
         console.log("client data", data);

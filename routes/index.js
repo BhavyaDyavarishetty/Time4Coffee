@@ -1,19 +1,29 @@
 var express = require('express');
 var router = express.Router();
 var persistance = require('./persistance')
-global.handle = () => {};
+global.registerHandle = () => {};
+global.getHandle = () => {};
 let pot_id;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  clearInterval(getHandle);
+  clearInterval(registerHandle);
+  getHandle = setInterval(async function() {
+    const record = await persistance.find({ "pot_id": "1" });
+    console.log('posted data', record);
+    io.emit('coffee-data', record);
+  }, 3000);
+
   res.render('index', { title: 'Time4Coffee' });
 });
 
 router.get('/register', async function(req, res, next) {
-  clearInterval(handle);
+  clearInterval(getHandle);
+  clearInterval(registerHandle);
   pot_id = 0;
   
-  handle = setInterval(async function() {
+  registerHandle = setInterval(async function() {
     const record = await persistance.find({ "pot_id": pot_id });
     // console.log('posted data', record);
     io.emit('data', record);
