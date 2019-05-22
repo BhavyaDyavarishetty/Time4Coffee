@@ -11,6 +11,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.green-check {
+  font-size: 24px;
+}
+
 .name-label {
   font-size: 18px;
   color: #349cee;
@@ -29,6 +33,16 @@ body {
 .full-pot {
   display: flex;
   justify-content: space-between;
+}
+
+.done-btn {
+  background-color: #349cee;
+  height: 40px;
+  width: 95px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
 }
 
 .input-text{
