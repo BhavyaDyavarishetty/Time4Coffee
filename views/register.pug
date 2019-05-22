@@ -1,18 +1,17 @@
 extends layout
 
 block content
-  h1= emptyWeight
-  p Welcome to #{title} register
 
-  div.pot-name
-    | Pot Name: 
-    input(type='text', id='pot-input-text', value=name)
-  div.empty-pot
-    | Place the pot on scale
-    i(class='green-check fas fa-check-square', id='empty-pot-check', style='visibility:hidden')
-  div.full-pot
-    | Fill the pot
-    i(class='green-check fas fa-check-square', id='pot-capacity-check', style='visibility:hidden')
+  div.pot-register
+    div.pot-name
+      label(class='name-label') Pot Name: 
+      input(type='text', id='pot-input-text', value=name)
+    div.label.empty-pot
+      label(class='empty-label') Place the pot on scale
+      i(class='green-check fas fa-check-square', id='empty-pot-check', style='visibility:hidden')
+    div.label.full-pot
+      label(class='capacity-label') Fill the pot
+      i(class='green-check fas fa-check-square', id='pot-capacity-check', style='visibility:hidden')
 
-  a(href="/")
-   button(type="button") Done
+    a(href="/")
+      button(type='button') Done

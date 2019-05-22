@@ -7,10 +7,14 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/fontawesome-free-5.8.2-web/css/all.css')
   body
-    block content
+    .nav.fr.mt2.mr2
+      a(href='/register')
+        register new pot
+    .layout.br4.pa4
+      block content
     script(src="/socket.io/socket.io.js")
     script.
-      const socket = io('http://localhost:3001');
+      const socket = io('/');
       var input = document.querySelector('#pot-input-text');
 
       input.addEventListener('keyup', async function(event) {
@@ -48,7 +52,6 @@ html
 
       socket.on('connect', function() {
         console.log('connect ******');
-        document.getElementById("status").innerHTML = "connected";   
       });
       socket.on('data', function(data) {
         console.log("client data", data);
@@ -57,9 +60,11 @@ html
           document.querySelector('#pot-input-text').value = data.pot_name;
         }
         if (data.empty_pot_weight > 0) {
+          document.querySelector('.empty-pot').style.color = '#349cee';
           document.querySelector('#empty-pot-check').style.visibility = 'visible';
         }
         if (data.pot_capacity > data.empty_pot_weight) {
+          document.querySelector('.full-pot').style.color = '#349cee';
           document.querySelector('#pot-capacity-check').style.visibility = 'visible';
         }
       });

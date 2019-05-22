@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var persistance = require('./persistance')
+global.handle = () => {};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,32 +9,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', async function(req, res, next) {
-  // res.render('register', { title: 'Register Pot' });
-  // let time = 0
-
-  setInterval(async function() {
-    console.log('every 2 secs');
-    // console.log('posted data', io);
+  clearInterval(handle);
+  handle = setInterval(async function() {
     const record = await persistance.find({});
     console.log('posted data', record);
     io.emit('data', record);
   }, 3000);
 
-  // if not fetched from db
   res.render('register', { 
     name: '' 
   })
-
-
-  // // if fetched from db but without empty weight
-  // res.render('register', { name: 'Time4Coffee', emptyWeight: false })
-  // update mongo with empty weight
-
-  // if fetched from db but without capacity weight
-  // res.render('register', { name: 'Time4Coffee', emptyWeight: 'Testing', capacityWeight: false })
-
-  // if fetched from db with all info
-  // res.render('index', { title: 'Time4Coffee' })
 });
 
 router.post('/register', async function(req, res) {

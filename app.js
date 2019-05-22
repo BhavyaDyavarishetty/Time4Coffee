@@ -11,7 +11,6 @@ global.io = require('socket.io')(http);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.set('io', io);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -42,7 +41,7 @@ app.use(function(err, req, res, next) {
 });
 
 io.on('connect', (client) => {
-  console.log('client connected******');         
+  console.log('client connected******');
 });
 
 http.listen(3001, function(){
