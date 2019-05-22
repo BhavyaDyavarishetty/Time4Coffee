@@ -18,8 +18,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
 module.exports = {
   insert: async function (params) {
     const collection = db.collection(collectionName);
-    const resp = await collection.insertOne(params);
-    console.log('resp', resp);
+    await collection.insertOne(params);
   },
 
   update: async function (id, params) {
