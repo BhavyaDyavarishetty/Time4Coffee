@@ -1,6 +1,18 @@
+html {
+  background-image: linear-gradient(45deg,#EED1F0, #D1A1F0, #A896EC);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.layout {
+  background-color: hsla(0, 0%, 100%, 0.55);
 }
 
 a {
