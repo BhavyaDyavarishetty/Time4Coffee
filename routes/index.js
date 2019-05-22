@@ -40,6 +40,7 @@ router.post('/register', async function(req, res) {
 router.post('/update', async function(req, res) {
   const data = req['body'];
   const { id, weight } = data;
+  console.log('data***********', data, id, weight);
   const record = await persistance.find({ pot_id: id });
   console.log('record***********', record);
   if(record) {
