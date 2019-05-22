@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var persistance = require('./persistance')
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,7 +23,6 @@ router.get('/register', function(req, res, next) {
       console.log("update mongo");
     } 
   })
-
   // // if fetched from db but without empty weight
   // res.render('register', { name: 'Time4Coffee', emptyWeight: false })
   // update mongo with empty weight
@@ -44,6 +45,5 @@ router.post('/update', function(req, res) {
     res.send('Pot is updated')
   });
 });
-
 
 module.exports = router;

@@ -5,4 +5,12 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/fontawesome-free-5.8.2-web/css/all.css')
   body
+    script(src="/socket.io/socket.io.js")
+    script.
+      const socket = io('http://localhost:3001');
+
+      socket.on('connect', function() {
+        console.log('connect ******');
+        document.getElementById("status").innerHTML = "connected";   
+      });
     block content
