@@ -6,15 +6,13 @@ block content
 
   div.pot-name
     | Pot Name: 
-    input(type='text', name='title', value=name, onkeydown=inputEnter())
+    input(type='text', id='pot-input-text', value=name)
   div.empty-pot
     | Place the pot on scale
-    if emptyWeight
-      i(class='green-check fas fa-check-square')
+    i(class='green-check fas fa-check-square', id='empty-pot-check', style='visibility:hidden')
   div.full-pot
     | Fill the pot
-    if capacityWeight
-      i(class='green-check fas fa-check-square')
+    i(class='green-check fas fa-check-square', id='pot-capacity-check', style='visibility:hidden')
 
-  a(href="/register")
+  a(href="/")
    button(type="button") Done
