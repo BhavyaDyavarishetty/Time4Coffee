@@ -12,11 +12,12 @@ body {
 }
 
 .layout {
-  background-color: hsla(0, 0%, 100%, 0.55);
+  background-color: hsla(0, 0%, 100%, 0.70);
 }
 
-a {
-  color: #00B7FF;
+.nav {
+  color: #3500ff;
+  font-size: 18px;
 }
 
 .cups-left {
